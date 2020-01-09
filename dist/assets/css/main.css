@@ -1,0 +1,127 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  text-align: inherit;
+  text-decoration: inherit;
+  font: inherit;
+  vertical-align: baseline;
+  color: inherit;
+  background: transparent;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+header {
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+}
+header h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+.modalFormBackground {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgba(25, 25, 25, 0.5);
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+}
+
+form {
+  padding: 1rem;
+  background: red;
+}
+form input {
+  width: 280px;
+  margin-bottom: 1rem;
+}
+form button {
+  display: inline-block;
+}
+
+main {
+  display: flex;
+}
+main button {
+  display: inline;
+}
+main .list-of-projects {
+  padding: 1rem;
+  width: 33.3333333333%;
+  background: red;
+}
+main .list-of-todo-items {
+  padding: 1rem;
+  background: yellow;
+  flex: 1;
+}
+main .section-header {
+  display: flex;
+  background: blue;
+  font-size: 2rem;
+}
+main .section-header h2 {
+  flex: 1;
+}
+main .create-new-project-btn {
+  cursor: pointer;
+}
+main .create-new-project-btn:hover {
+  color: yellow;
+}
+main .create-new-project-btn:active {
+  color: orange;
+}
+
+/*# sourceMappingURL=main.css.map */
