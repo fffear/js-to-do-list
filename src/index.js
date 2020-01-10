@@ -7,6 +7,7 @@ import { FormGenerator } from "./formGenerator";
 import { Events } from "./eventPubSub";
 import { ProjectController } from "./projectController";
 import { ProjectView } from "./projectView";
+import { ToDoListView } from "./toDoListView"
 
 let test = ToDoItem("Test Title", "Test Description", "Test Due Date", "Test Priority");
 let test2 = ToDoItem("Test Title 2", "Test Description 2", "Test Due Date 2", "Test Priority 2");
@@ -44,8 +45,6 @@ console.log(Projects.list);
 
 console.log("After:");
 console.log(Projects.findProject("Project 1"));
-
-
 
 
 

@@ -20,8 +20,6 @@ const Projects = (function() {
 
   const findProject = (projectName) => {
     let projectToReturn;
-    console.log(projectName);
-    console.log("Looping");
 
     for (let project of _list) {
       if (project.name === projectName) {
