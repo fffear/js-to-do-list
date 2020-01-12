@@ -1,11 +1,14 @@
 // Module containing list of all projects
 const Projects = (function() {
+  let currentProjectIDNo = 0;
   let _list = [];
   // let projectTemplate = document.getElementById("projects-template").innerHTML;
   // console.log(projectTemplate);
 
   const addProject = (project) => {
+    project.id = currentProjectIDNo;
     _list.push(project);
+    incrementProjectIDNo();
     // Event listener to update Project list
   }
 
@@ -24,19 +27,20 @@ const Projects = (function() {
     for (let project of _list) {
       if (project.name === projectName) {
         return project;
-      }
-      
+      }  
     }
+  }
 
-    // _list.forEach(function(project, idx) {
-    //   if (project.name === projectName) {
-    //     console.log(project);
-    //     projectToReturn = project;
-    //   }
-    //   break;
-    // });
+  const findProjectByNo = (number) => {
+    for (let project of _list) {
+      if (project.id === number ) {
+        return project;
+      }
+    }
+  }
 
-    // return projectToReturn;
+  const incrementProjectIDNo = () => {
+    currentProjectIDNo++;
   }
 
   return {
@@ -46,7 +50,8 @@ const Projects = (function() {
 
     addProject,
     removeProject,
-    findProject
+    findProject,
+    findProjectByNo
   };
 })();
 

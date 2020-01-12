@@ -7,7 +7,8 @@ import { FormGenerator } from "./formGenerator";
 import { Events } from "./eventPubSub";
 import { ProjectController } from "./projectController";
 import { ProjectView } from "./projectView";
-import { ToDoListView } from "./toDoListView"
+import { ToDoListController } from "./toDoListController";
+import { ToDoListView } from "./toDoListView";
 
 let test = ToDoItem("Test Title", "Test Description", "Test Due Date", "Test Priority");
 let test2 = ToDoItem("Test Title 2", "Test Description 2", "Test Due Date 2", "Test Priority 2");
@@ -20,16 +21,29 @@ let Project1 = Project("Project 1");
 Projects.addProject(AllToDoItems);
 Projects.addProject(Project1);
 
+// console.log(AllToDoItems.id);
+// console.log(Project1.id);
 
+console.log("I think it came from index"); 
+Project1.addToDoItem(test);
+console.log("I think it came from index"); 
+Project1.addToDoItem(test2);
+console.log("I think it came from index"); 
+Project1.addToDoItem(test3);
+Project1.removeToDoItem(test2);
+
+console.log("I think it came from index"); 
 AllToDoItems.addToDoItem(test);
+console.log("I think it came from index"); 
 AllToDoItems.addToDoItem(test2);
+console.log("I think it came from index"); 
 AllToDoItems.addToDoItem(test3);
 AllToDoItems.removeToDoItem(test2);
 
-Project1.addToDoItem(test);
-Project1.addToDoItem(test2);
-Project1.addToDoItem(test3);
-Project1.removeToDoItem(test2);
+
+// console.log(test.projectIDNo);
+// console.log(test2.projectIDNo);
+// console.log(test3.projectIDNo);
 
 console.log("-----All To Do Items-----");
 console.log(AllToDoItems);

@@ -49,12 +49,13 @@
       <button class="create-new-todo-item-btn">
         <i class="fas fa-plus-circle"></i> Create New ToDo Item
       </button>
+
       <ul id="todo-list">
         <script id="todo-list-template" type="text/template">
           {{#toDoList}}
             <li>
-              <span>{{description}}</span>
               <span>{{title}}</span>
+              <span>{{description}}</span>
               <span>{{dueDate}}</span>
               <span>{{priority}}</span>
               <i class="del-item">X</i>

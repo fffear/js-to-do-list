@@ -1,9 +1,15 @@
 // Add and Delete ToDoItems to a Project
 const Project = (name) => {
   let _name = name;
+  let _idNo;
   let _toDoList = [];
 
   const addToDoItem = (item) => {
+    if (_idNo != 0) {
+      item.projectIDNo = _idNo;
+    }
+ 
+    console.log(item.projectIDNo);
     _toDoList.push(item);
     // Event Listener here to update ToDoList Display
   }
@@ -17,6 +23,14 @@ const Project = (name) => {
     });
   }
 
+  const findToDoItem = (itemTitle) => {
+    for (let toDoItem of _toDoList) {
+      if (toDoItem.title === itemTitle) {
+        return toDoItem;
+      } 
+    }
+  }
+
   return {
     get name() {
       return _name;
@@ -26,12 +40,21 @@ const Project = (name) => {
       _name = name;
     },
 
+    get id() {
+      return _idNo;
+    },
+
+    set id(number) {
+      _idNo = number;
+    },
+
     get toDoList() {
       return _toDoList;
     },
 
     addToDoItem,
-    removeToDoItem
+    removeToDoItem,
+    findToDoItem
   };
 }
 

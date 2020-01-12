@@ -11,7 +11,12 @@ const ToDoListView = (function(projects, projectClass) {
   let toDoListTemplate = document.getElementById("todo-list-template").innerHTML;
   console.log(toDoListTemplate);
 
-  projectList.addEventListener("click", function(e) {
+  document.addEventListener("click", deleteToDoItem);
+  Events.on("toDoItemCreated", render);
+
+  projectList.addEventListener("click", displayCurrentProjectTasks);
+
+  function displayCurrentProjectTasks(e) {
     if (e.target.tagName == "SPAN") {
       if (e.target.innerText === "All To-Do Items 2") {
         removeCreateToDoItemBtn();
@@ -19,9 +24,10 @@ const ToDoListView = (function(projects, projectClass) {
         addCreateToDoItemBtn();
       }
       displaySelectedProject(e.target.innerText);
-      render(e.target.innerText);
+      render();
     }
-  });
+  }
+  
 
   function removeCreateToDoItemBtn() {
     let createToDoItemBtn = document.querySelector(".create-new-todo-item-btn");
@@ -32,6 +38,7 @@ const ToDoListView = (function(projects, projectClass) {
 
   function addCreateToDoItemBtn() {
     let createToDoItemBtn = document.querySelector(".create-new-todo-item-btn");
+
     if (createToDoItemBtn === null) {
       createToDoItemBtn = document.createElement("button");
       createToDoItemBtn.classList.add("create-new-todo-item-btn");
@@ -40,16 +47,26 @@ const ToDoListView = (function(projects, projectClass) {
       plusIcon.classList.add("fas", "fa-plus-circle");
 
       createToDoItemBtn.appendChild(plusIcon);
-      createToDoItemBtn.textContent = "Create New ToDo Item";
-      // console.log(createToDoItemBtn);
+      createToDoItemBtn.appendChild( document.createTextNode(" Create New ToDo Item"));
       toDoItemsSection.appendChild(createToDoItemBtn);
+    }
+  }
 
+  function deleteToDoItem(e) {
+    if (e.target.className === "del-item") {
+      toDoListDiv.removeChild(e.target.parentNode);
+      // console.log(e.target.parentNode.firstElementChild.innerText);
+      Events.emit("toDoItemDeleted", e.target.parentNode.firstElementChild.innerText);
+      console.log(e.target.parentNode.firstElementChild.innerText);
+      // console.log(e.target.previousElementSibling.textContent);
+      // projectList.removeChild(e.target.parentNode);
+      // Events.emit("projectDeleted", e.target.previousElementSibling.textContent);
     }
   }
 
   function displaySelectedProject(projectName) {
-    let testProject = projects.findProject(projectName);
-    projectHeading.textContent = testProject.name;
+    // let testProject = projects.findProject(projectName);
+    projectHeading.textContent = projectName;
   }
 
   function extractData(projectName) {
@@ -67,8 +84,8 @@ const ToDoListView = (function(projects, projectClass) {
     return objectData;
   }
 
-  function render(projectName) {
-    let data = { toDoList: extractData(projectName) };
+  function render() {
+    let data = { toDoList: extractData(projectHeading.textContent) };
     toDoListDiv.innerHTML = Mustache.render(toDoListTemplate, data);
   }
 

@@ -6,8 +6,10 @@ const ProjectController = (function(projects, projectClass) {
   Events.on("projectDeleted", remove);
 
   function add(project) {
-    projects.addProject(projectClass(project));
-    console.log(projects);
+    let newProject = projectClass(project);
+    projects.addProject(newProject);
+    console.log("This came from project controller");
+    console.log(newProject.id);
   }
 
   function remove(targetProject) {

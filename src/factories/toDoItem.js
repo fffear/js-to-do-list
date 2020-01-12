@@ -1,6 +1,7 @@
 // An information holder containing getter and setter methods
 const ToDoItem = (title, description, dueDate, priority) => {
   let _title = title;
+  let _projectIDNo;
   let _description = description;
   let _dueDate = dueDate;
   let _priority = priority;
@@ -12,6 +13,14 @@ const ToDoItem = (title, description, dueDate, priority) => {
 
     set title(title) {
       _title = title;
+    },
+
+    get projectIDNo() {
+      return _projectIDNo;
+    },
+
+    set projectIDNo(projectIDNo) {
+      _projectIDNo = projectIDNo;
     },
 
     get description() {
