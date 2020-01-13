@@ -24,21 +24,21 @@ Projects.addProject(Project1);
 // console.log(AllToDoItems.id);
 // console.log(Project1.id);
 
-console.log("I think it came from index"); 
-Project1.addToDoItem(test);
-console.log("I think it came from index"); 
-Project1.addToDoItem(test2);
-console.log("I think it came from index"); 
-Project1.addToDoItem(test3);
-Project1.removeToDoItem(test2);
+// console.log("I think it came from index"); 
+// Project1.addToDoItem(test);
+// console.log("I think it came from index"); 
+// Project1.addToDoItem(test2);
+// console.log("I think it came from index"); 
+// Project1.addToDoItem(test3);
+// Project1.removeToDoItem(test2);
 
-console.log("I think it came from index"); 
-AllToDoItems.addToDoItem(test);
-console.log("I think it came from index"); 
-AllToDoItems.addToDoItem(test2);
-console.log("I think it came from index"); 
-AllToDoItems.addToDoItem(test3);
-AllToDoItems.removeToDoItem(test2);
+// console.log("I think it came from index"); 
+// AllToDoItems.addToDoItem(test);
+// console.log("I think it came from index"); 
+// AllToDoItems.addToDoItem(test2);
+// console.log("I think it came from index"); 
+// AllToDoItems.addToDoItem(test3);
+// AllToDoItems.removeToDoItem(test2);
 
 
 // console.log(test.projectIDNo);

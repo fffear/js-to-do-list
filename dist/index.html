@@ -24,16 +24,16 @@
       <ul id="projects">
         <script id="all-tasks-template" type="text/template">
           {{#allTasksName}}
-            <li>
-              <span>{{.}}</span>
+            <li data-project-id="{{id}}">
+              <span>{{name}}</span>
             </li>
           {{/allTasksName}}
         </script>
 
         <script id="projects-template" type="text/template">
           {{#projectNames}}
-            <li>
-              <span>{{.}}</span>
+            <li data-project-id="{{id}}">
+              <span>{{name}}</span>
               <i class="del">X</i>
             </li>
           {{/projectNames}}
@@ -53,7 +53,7 @@
       <ul id="todo-list">
         <script id="todo-list-template" type="text/template">
           {{#toDoList}}
-            <li>
+            <li data-task-id="{{taskIDNo}}">
               <span>{{title}}</span>
               <span>{{description}}</span>
               <span>{{dueDate}}</span>

@@ -8,8 +8,7 @@ const Project = (name) => {
     if (_idNo != 0) {
       item.projectIDNo = _idNo;
     }
- 
-    console.log(item.projectIDNo);
+
     _toDoList.push(item);
     // Event Listener here to update ToDoList Display
   }
@@ -26,6 +25,14 @@ const Project = (name) => {
   const findToDoItem = (itemTitle) => {
     for (let toDoItem of _toDoList) {
       if (toDoItem.title === itemTitle) {
+        return toDoItem;
+      } 
+    }
+  }
+
+  const findToDoItemByTaskID = (taskNo) => {
+    for (let toDoItem of _toDoList) {
+      if (toDoItem.taskIDNo == taskNo) {
         return toDoItem;
       } 
     }
@@ -54,7 +61,8 @@ const Project = (name) => {
 
     addToDoItem,
     removeToDoItem,
-    findToDoItem
+    findToDoItem,
+    findToDoItemByTaskID
   };
 }
 

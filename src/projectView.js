@@ -20,8 +20,10 @@ let ProjectView = (function(projects) {
   function deleteProject(e) {
     if (e.target.className === "del") {
       // console.log(e.target.previousElementSibling.textContent);
+      console.log(e.target.parentNode.dataset.projectId);
       projectList.removeChild(e.target.parentNode);
-      Events.emit("projectDeleted", e.target.previousElementSibling.textContent);
+      // Events.emit("projectDeleted", e.target.previousElementSibling.textContent);
+      Events.emit("projectDeleted", e.target.parentNode.dataset.projectId);
 
       // console.log(projects);
     }
@@ -30,7 +32,9 @@ let ProjectView = (function(projects) {
   function extractProjectName(projects, namesArray) {
     namesArray.length = 0;
     projects.forEach(function(item) {
-      namesArray.push(item.name);
+      namesArray.push({ name: item.name,
+                        id: item.id
+                      });
     });
   }
 

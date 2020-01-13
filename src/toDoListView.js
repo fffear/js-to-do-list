@@ -28,7 +28,6 @@ const ToDoListView = (function(projects, projectClass) {
     }
   }
   
-
   function removeCreateToDoItemBtn() {
     let createToDoItemBtn = document.querySelector(".create-new-todo-item-btn");
     if (!(createToDoItemBtn === null)) {
@@ -55,12 +54,7 @@ const ToDoListView = (function(projects, projectClass) {
   function deleteToDoItem(e) {
     if (e.target.className === "del-item") {
       toDoListDiv.removeChild(e.target.parentNode);
-      // console.log(e.target.parentNode.firstElementChild.innerText);
-      Events.emit("toDoItemDeleted", e.target.parentNode.firstElementChild.innerText);
-      console.log(e.target.parentNode.firstElementChild.innerText);
-      // console.log(e.target.previousElementSibling.textContent);
-      // projectList.removeChild(e.target.parentNode);
-      // Events.emit("projectDeleted", e.target.previousElementSibling.textContent);
+      Events.emit("toDoItemDeleted", e.target.parentNode.dataset.taskId);
     }
   }
 
@@ -77,7 +71,8 @@ const ToDoListView = (function(projects, projectClass) {
         title: toDoItem.title,
         description: toDoItem.description,
         dueDate: toDoItem.dueDate,
-        priority: toDoItem.priority
+        priority: toDoItem.priority,
+        taskIDNo: toDoItem.taskIDNo
       });
     });
 
@@ -87,6 +82,7 @@ const ToDoListView = (function(projects, projectClass) {
   function render() {
     let data = { toDoList: extractData(projectHeading.textContent) };
     toDoListDiv.innerHTML = Mustache.render(toDoListTemplate, data);
+
   }
 
   return { displaySelectedProject };

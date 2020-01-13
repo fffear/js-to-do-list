@@ -8,25 +8,22 @@ const ProjectController = (function(projects, projectClass) {
   function add(project) {
     let newProject = projectClass(project);
     projects.addProject(newProject);
-    console.log("This came from project controller");
-    console.log(newProject.id);
   }
 
-  function remove(targetProject) {
-    console.log("Does this even work?");
-    let projectToDelete = projects.findProject(targetProject);
-
+  function remove(projectID) {
+    let projectToDelete = projects.findProjectByNo(Number(projectID));
+    removeTasksFromAllItemsWith(projectID);
     projects.removeProject(projectToDelete);
-    console.log(projects);
+  }
 
-    // projects.list.find(function(project, index) {
-    //   if (project === projectToDelete) {
-    //     projects.splice(index, 1);
-    //     console.log(projects);
-    //     return;
-    //     // Event listener to update Project list
-    //   }
-    // });
+  function removeTasksFromAllItemsWith(deletedProjectId) {
+    let allItems = projects.list[0];
+    for (let i = 0; i < allItems.toDoList.length; i++) {
+      if (allItems.toDoList[i].projectIDNo == deletedProjectId) {
+        allItems.toDoList.splice(i, 1);
+        i--;
+      }
+    }
   }
 })(Projects, Project);
 

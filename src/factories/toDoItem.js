@@ -2,6 +2,7 @@
 const ToDoItem = (title, description, dueDate, priority) => {
   let _title = title;
   let _projectIDNo;
+  let _taskIDNo;
   let _description = description;
   let _dueDate = dueDate;
   let _priority = priority;
@@ -21,6 +22,14 @@ const ToDoItem = (title, description, dueDate, priority) => {
 
     set projectIDNo(projectIDNo) {
       _projectIDNo = projectIDNo;
+    },
+
+    get taskIDNo() {
+      return _taskIDNo;
+    },
+
+    set taskIDNo(taskIDNo) {
+      _taskIDNo = taskIDNo;
     },
 
     get description() {
