@@ -9,12 +9,21 @@ const ToDoListView = (function(projects, projectClass) {
   let projectList = document.getElementById("projects");
   let toDoListDiv = document.getElementById("todo-list");
   let toDoListTemplate = document.getElementById("todo-list-template").innerHTML;
-  console.log(toDoListTemplate);
+  // displayAllItemsTasks();
 
   document.addEventListener("click", deleteToDoItem);
   Events.on("toDoItemCreated", render);
+  Events.on("projectDeleted", displayAllItemsTasks);
 
   projectList.addEventListener("click", displayCurrentProjectTasks);
+
+  function displayAllItemsTasks() {
+    removeCreateToDoItemBtn();
+
+    displaySelectedProject("All To-Do Items 2");
+    render();
+
+  }
 
   function displayCurrentProjectTasks(e) {
     if (e.target.tagName == "SPAN") {
@@ -53,8 +62,9 @@ const ToDoListView = (function(projects, projectClass) {
 
   function deleteToDoItem(e) {
     if (e.target.className === "del-item") {
-      toDoListDiv.removeChild(e.target.parentNode);
-      Events.emit("toDoItemDeleted", e.target.parentNode.dataset.taskId);
+      // console.log(e.target.closest("li"));
+      toDoListDiv.removeChild(e.target.closest("li"));
+      Events.emit("toDoItemDeleted", e.target.closest("li").dataset.taskId);
     }
   }
 
@@ -82,15 +92,9 @@ const ToDoListView = (function(projects, projectClass) {
   function render() {
     let data = { toDoList: extractData(projectHeading.textContent) };
     toDoListDiv.innerHTML = Mustache.render(toDoListTemplate, data);
-
   }
 
-  return { displaySelectedProject };
+  return { displaySelectedProject, displayAllItemsTasks };
 })(Projects, Project);
 
 export { ToDoListView };
-
-
-// <button class="create-new-todo-item-btn">
-//  <i class="fas fa-plus-circle create-new-project-btn"></i> Create New ToDo Item
-// </button>

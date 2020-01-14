@@ -57,6 +57,12 @@ main {
     padding: 1rem;
     background: yellow;
     flex: 1;
+
+    #todo-list {
+      .hidden {
+        display: none;
+      }
+    }
   }
 
   .section-header {

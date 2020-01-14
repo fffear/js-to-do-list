@@ -22,8 +22,6 @@ const Projects = (function() {
   }
 
   const findProject = (projectName) => {
-    let projectToReturn;
-
     for (let project of _list) {
       if (project.name === projectName) {
         return project;

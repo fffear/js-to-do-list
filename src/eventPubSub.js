@@ -6,7 +6,6 @@ const Events = (function() {
   function on(eventName, fn) {
     _events[eventName] = _events[eventName] || [];
     _events[eventName].push(fn);
-    console.log(_events);
   }
 
   function off(eventName, fn) {
@@ -14,7 +13,6 @@ const Events = (function() {
       for (let i = 0; i < _events[eventName].length; i++) {
         if (_events[eventName][i] === fn) {
           _events[eventName].splice(i, 1);
-          console.log(_events);
           break;
         }
       }
@@ -28,7 +26,6 @@ const Events = (function() {
       });
     }
   }
-
 
   return { on, off, emit };
 })();

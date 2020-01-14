@@ -106,6 +106,9 @@ main .list-of-todo-items {
   background: yellow;
   flex: 1;
 }
+main .list-of-todo-items #todo-list .hidden {
+  display: none;
+}
 main .section-header {
   display: flex;
   background: blue;

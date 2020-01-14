@@ -54,11 +54,20 @@
         <script id="todo-list-template" type="text/template">
           {{#toDoList}}
             <li data-task-id="{{taskIDNo}}">
-              <span>{{title}}</span>
-              <span>{{description}}</span>
-              <span>{{dueDate}}</span>
-              <span>{{priority}}</span>
-              <i class="del-item">X</i>
+              <div class="to-do-item-div">
+                <span>{{title}}</span>
+                <span>{{dueDate}}</span>
+                <span>{{priority}}</span>
+                <i class="del-item">X</i>
+              </div>
+
+              <div class="hidden">
+                <div>
+                  <h3>Description</h3>
+                  <div>{{description}}</div>
+                </div>
+                <button class="edit-task">Edit Task</button>
+              </div>
             </li>
           {{/toDoList}}
         </script>
