@@ -1,9 +1,14 @@
+import { LocalStorageController } from "../localStorageController";
+
 // Module containing list of all projects
 const Projects = (function() {
   let currentProjectIDNo = 0;
   let _list = [];
-  // let projectTemplate = document.getElementById("projects-template").innerHTML;
-  // console.log(projectTemplate);
+
+  // if (LocalStorageController.storageAvailable('localStorage') && localStorage.hasOwnProperty("projects")) {
+  //   let projects = JSON.parse(localStorage.getItem("projects"));
+  //   console.log(projects);
+  // }
 
   const addProject = (project) => {
     project.id = currentProjectIDNo;
@@ -44,6 +49,14 @@ const Projects = (function() {
   return {
     get list() {
       return _list;
+    },
+
+    get currentProjectIDNo() {
+      return currentProjectIDNo;
+    },
+
+    set currentProjectIDNo(number) {
+      currentProjectIDNo = number + 1;
     },
 
     addProject,

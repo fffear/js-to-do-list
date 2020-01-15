@@ -1,5 +1,6 @@
 import { ToDoItem, Projects, Project } from "./factories/factoryFunctions";
 import { Events } from "./eventPubSub";
+import { LocalStorageController } from "./localStorageController";
 
 const ToDoItemController = (function(projects) {
   Events.on("toDoItemEdited", editTask);
@@ -11,5 +12,9 @@ const ToDoItemController = (function(projects) {
     taskToChange.description = taskData.description;
     taskToChange.dueDate = taskData.dueDate;
     taskToChange.priority = taskData.priority;
+
+    if (LocalStorageController.storageAvailable('localStorage')) {
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
   }
 })(Projects);

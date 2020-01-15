@@ -17,7 +17,6 @@ const ToDoItemView = (function(projects) {
     }
 
     if (e.target.className == "edit-task") {
-      //let hiddenEl = e.target.closest("li").children[1];
       let taskId = e.target.closest("li").dataset.taskId;
       let taskData = extractData(taskId);
       Events.emit("createEditTaskForm", taskData);
@@ -26,7 +25,7 @@ const ToDoItemView = (function(projects) {
 
   function extractData(taskId) {
     let objectData;
-    let targetProject = projects.findProject("All To-Do Items 2");
+    let targetProject = projects.findProject("All To-Do Items");
     let targetItem = targetProject.findToDoItemByTaskID(taskId);
     objectData = {
       title: targetItem.title,
@@ -43,7 +42,7 @@ const ToDoItemView = (function(projects) {
     let itemToEdit = document.querySelector(`[data-task-id="${taskIDNo}"]`);
     let toDoList = itemToEdit.parentNode;
 
-    let targetProject = projects.findProject("All To-Do Items 2");
+    let targetProject = projects.findProject("All To-Do Items");
     let targetItem = targetProject.findToDoItemByTaskID(taskIDNo);
 
 

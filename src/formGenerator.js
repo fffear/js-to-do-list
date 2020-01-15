@@ -1,4 +1,5 @@
 import { Events } from "./eventPubSub";
+import { LocaLStorageController } from "./localStorageController";
 
 const FormGenerator = (function() {
   // cache DOM

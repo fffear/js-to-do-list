@@ -1,5 +1,6 @@
 import { ToDoItem, Projects, Project } from "./factories/factoryFunctions";
 import { Events } from "./eventPubSub";
+import { LocalStorageController } from "./localStorageController";
 
 const ToDoListController = (function(projects, projectClass) {
   let itemIDNo = 0;
@@ -9,13 +10,16 @@ const ToDoListController = (function(projects, projectClass) {
   Events.on("toDoItemDeleted", removeFromProjects);
 
   function removeFromProjects(taskID) {
-    let allItemsProject = projects.findProject("All To-Do Items 2");
-    // let itemToDelete = allItemsProject.findToDoItem(toDoItemTitle);
+    let allItemsProject = projects.findProject("All To-Do Items");
     let itemToDelete = allItemsProject.findToDoItemByTaskID(taskID);
 
     let currentProject = projects.findProjectByNo(itemToDelete.projectIDNo);
     removeFromAllItems(itemToDelete);
     removeFromCurrentProject(itemToDelete);
+
+    if (LocalStorageController.storageAvailable('localStorage')) {
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
 
     function removeFromAllItems(itemToDelete) {
       allItemsProject.removeToDoItem(itemToDelete);
@@ -27,7 +31,7 @@ const ToDoListController = (function(projects, projectClass) {
   }
 
   function addToProjects(taskDetails) {
-    let allItemsProject = projects.findProject("All To-Do Items 2");
+    let allItemsProject = projects.findProject("All To-Do Items");
     let currentProject = projects.findProject(taskDetails["currentProjectName"]);
     let newToDoItem = ToDoItem(taskDetails["title"],
                               taskDetails["description"],
@@ -36,6 +40,10 @@ const ToDoListController = (function(projects, projectClass) {
     assignItemID(newToDoItem);
     addToCurrentProject(newToDoItem);
     addToAllItems(newToDoItem);
+
+    if (LocalStorageController.storageAvailable('localStorage')) {
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
 
     function addToAllItems(newToDoItem) {
       allItemsProject.addToDoItem(newToDoItem);
@@ -53,6 +61,16 @@ const ToDoListController = (function(projects, projectClass) {
   function assignItemID(newToDoItem) {
     newToDoItem.taskIDNo = itemIDNo;
     incrementItemID();
+  }
+
+  return {
+    get itemIDNo() {
+      return itemIDNo;
+    },
+
+    set itemIDNo(number) {
+      itemIDNo = number + 1;
+    }
   }
 })(Projects, Project);
 

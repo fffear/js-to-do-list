@@ -9,7 +9,6 @@ const ToDoListView = (function(projects, projectClass) {
   let projectList = document.getElementById("projects");
   let toDoListDiv = document.getElementById("todo-list");
   let toDoListTemplate = document.getElementById("todo-list-template").innerHTML;
-  // displayAllItemsTasks();
 
   document.addEventListener("click", deleteToDoItem);
   Events.on("toDoItemCreated", render);
@@ -20,14 +19,14 @@ const ToDoListView = (function(projects, projectClass) {
   function displayAllItemsTasks() {
     removeCreateToDoItemBtn();
 
-    displaySelectedProject("All To-Do Items 2");
+    displaySelectedProject("All To-Do Items");
     render();
 
   }
 
   function displayCurrentProjectTasks(e) {
     if (e.target.tagName == "SPAN") {
-      if (e.target.innerText === "All To-Do Items 2") {
+      if (e.target.innerText === "All To-Do Items") {
         removeCreateToDoItemBtn();
       } else {
         addCreateToDoItemBtn();
@@ -62,7 +61,6 @@ const ToDoListView = (function(projects, projectClass) {
 
   function deleteToDoItem(e) {
     if (e.target.className === "del-item") {
-      // console.log(e.target.closest("li"));
       toDoListDiv.removeChild(e.target.closest("li"));
       Events.emit("toDoItemDeleted", e.target.closest("li").dataset.taskId);
     }

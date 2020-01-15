@@ -1,5 +1,6 @@
 import { Projects, Project } from "./factories/factoryFunctions";
 import { Events } from "./eventPubSub";
+import { LocalStorageController } from "./localStorageController";
 
 const ProjectController = (function(projects, projectClass) {
   Events.on("projectCreated", add);
@@ -8,12 +9,20 @@ const ProjectController = (function(projects, projectClass) {
   function add(project) {
     let newProject = projectClass(project);
     projects.addProject(newProject);
+
+    if (LocalStorageController.storageAvailable('localStorage')) {
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
   }
 
   function remove(projectID) {
     let projectToDelete = projects.findProjectByNo(Number(projectID));
     removeTasksFromAllItemsWith(projectID);
     projects.removeProject(projectToDelete);
+
+    if (LocalStorageController.storageAvailable('localStorage')) {
+      localStorage.setItem("projects", JSON.stringify(projects));
+    }
   }
 
   function removeTasksFromAllItemsWith(deletedProjectId) {

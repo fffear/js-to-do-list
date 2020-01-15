@@ -10,19 +10,52 @@ import { ProjectView } from "./projectView";
 import { ToDoListController } from "./toDoListController";
 import { ToDoListView } from "./toDoListView";
 import { ToDoItemController } from "./toDoItemController";
-import {ToDoItemView } from "./toDoItemView";
+import { ToDoItemView } from "./toDoItemView";
+import { LocalStorageController } from "./localStorageController";
 
-let test = ToDoItem("Test Title", "Test Description", "Test Due Date", "Test Priority");
-let test2 = ToDoItem("Test Title 2", "Test Description 2", "Test Due Date 2", "Test Priority 2");
-let test3 = ToDoItem("Test Title 3", "Test Description 3", "Test Due Date 3", "Test Priority 3");
+if (LocalStorageController.storageAvailable('localStorage') && localStorage.hasOwnProperty("projects")) {
+  let projects = JSON.parse(localStorage.getItem("projects"));
+  let projectsList = projects.list;
+
+  // Each Project
+  projectsList.forEach(function(project) {
+    let projectTasks = project.toDoList;
+
+    let newProject = Project(project.name);
+    newProject.id = project.id;
+
+    // Each task in project
+    projectTasks.forEach(function(task) {
+      let projectTask = ToDoItem(task.title, task.description, task.dueDate, task.priority);
+      projectTask.projectIDNo = task.projectIDNo;
+      projectTask.taskIDNo = task.taskIDNo;
+      newProject.addToDoItem(projectTask);
+    });
+
+    Projects.addProject(newProject);
+  });
+
+  // Get current project id no from local storage
+  Projects.currentProjectIDNo = projectsList[projectsList.length - 1].id;
+
+  let allTasks = projectsList[0].toDoList;
+
+    // Get current item id no from local storage
+  ToDoListController.itemIDNo = allTasks[allTasks.length - 1].taskIDNo;
+
+  function extractProjectsFromLocalStorage(project) {
+
+  }
+} else {
+  let AllToDoItems = Project("All To-Do Items");
+  
+  Projects.addProject(AllToDoItems);
+}
 
 
-let AllToDoItems = Project("All To-Do Items 2");
-let Project1 = Project("Project 1");
-
-Projects.addProject(AllToDoItems);
-Projects.addProject(Project1);
 
 ProjectView.render();
 
 ToDoListView.displayAllItemsTasks();
+
+
