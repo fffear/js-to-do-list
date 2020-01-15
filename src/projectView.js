@@ -35,6 +35,8 @@ let ProjectView = (function(projects) {
     extractProjectName(projects.slice(1), projectNames);
     extractProjectName(projects.slice(0, 1), allTasksName);
 
+    // let projectHeading = document.querySelector(".project-heading");
+
     let allTasks = { allTasksName };
     let data = { projectNames };
 

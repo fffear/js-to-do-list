@@ -25,7 +25,7 @@ const ToDoItemView = (function(projects) {
 
   function extractData(taskId) {
     let objectData;
-    let targetProject = projects.findProject("All To-Do Items");
+    let targetProject = projects.findProjectByNo(0);
     let targetItem = targetProject.findToDoItemByTaskID(taskId);
     objectData = {
       title: targetItem.title,
@@ -42,7 +42,7 @@ const ToDoItemView = (function(projects) {
     let itemToEdit = document.querySelector(`[data-task-id="${taskIDNo}"]`);
     let toDoList = itemToEdit.parentNode;
 
-    let targetProject = projects.findProject("All To-Do Items");
+    let targetProject = projects.findProjectByNo(0);
     let targetItem = targetProject.findToDoItemByTaskID(taskIDNo);
 
 

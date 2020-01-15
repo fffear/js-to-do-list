@@ -10,7 +10,7 @@ const ToDoListController = (function(projects, projectClass) {
   Events.on("toDoItemDeleted", removeFromProjects);
 
   function removeFromProjects(taskID) {
-    let allItemsProject = projects.findProject("All To-Do Items");
+    let allItemsProject = projects.findProjectByNo(0);
     let itemToDelete = allItemsProject.findToDoItemByTaskID(taskID);
 
     let currentProject = projects.findProjectByNo(itemToDelete.projectIDNo);
@@ -31,8 +31,8 @@ const ToDoListController = (function(projects, projectClass) {
   }
 
   function addToProjects(taskDetails) {
-    let allItemsProject = projects.findProject("All To-Do Items");
-    let currentProject = projects.findProject(taskDetails["currentProjectName"]);
+    let allItemsProject = projects.findProjectByNo(0);
+    let currentProject = projects.findProjectByNo(Number(taskDetails["currentProjectId"]));
     let newToDoItem = ToDoItem(taskDetails["title"],
                               taskDetails["description"],
                               taskDetails["dueDate"],

@@ -19,7 +19,7 @@ const ToDoListView = (function(projects, projectClass) {
   function displayAllItemsTasks() {
     removeCreateToDoItemBtn();
 
-    displaySelectedProject("All To-Do Items");
+    displaySelectedProject("All To-Do Items", 0);
     render();
 
   }
@@ -31,7 +31,8 @@ const ToDoListView = (function(projects, projectClass) {
       } else {
         addCreateToDoItemBtn();
       }
-      displaySelectedProject(e.target.innerText);
+
+      displaySelectedProject(e.target.innerText, e.target.parentNode.dataset.projectId);
       render();
     }
   }
@@ -66,14 +67,14 @@ const ToDoListView = (function(projects, projectClass) {
     }
   }
 
-  function displaySelectedProject(projectName) {
-    // let testProject = projects.findProject(projectName);
+  function displaySelectedProject(projectName, projectID) {
+    projectHeading.setAttribute("data-project-id", projectID);
     projectHeading.textContent = projectName;
   }
 
-  function extractData(projectName) {
+  function extractData(projectID) {
     let objectData = [];
-    let targetProject = projects.findProject(projectName);
+    let targetProject = projects.findProjectByNo(Number(projectID));
     targetProject.toDoList.forEach(function(toDoItem, idx) {
       objectData.push({
         title: toDoItem.title,
@@ -88,7 +89,7 @@ const ToDoListView = (function(projects, projectClass) {
   }
 
   function render() {
-    let data = { toDoList: extractData(projectHeading.textContent) };
+    let data = { toDoList: extractData(Number(projectHeading.dataset.projectId)) };
     toDoListDiv.innerHTML = Mustache.render(toDoListTemplate, data);
   }
 

@@ -1,7 +1,3 @@
-let Mustache = require('mustache');
-//let projectTemplate = document.getElementById("projects-template");
-//console.log(projectTemplate);
-
 import { ToDoItem, Projects, Project } from "./factories/factoryFunctions";
 import { FormGenerator } from "./formGenerator";
 import { Events } from "./eventPubSub";
@@ -40,22 +36,16 @@ if (LocalStorageController.storageAvailable('localStorage') && localStorage.hasO
 
   let allTasks = projectsList[0].toDoList;
 
+  if (allTasks.length != 0) {
     // Get current item id no from local storage
-  ToDoListController.itemIDNo = allTasks[allTasks.length - 1].taskIDNo;
-
-  function extractProjectsFromLocalStorage(project) {
-
+    ToDoListController.itemIDNo = allTasks[allTasks.length - 1].taskIDNo;
   }
+
 } else {
   let AllToDoItems = Project("All To-Do Items");
-  
   Projects.addProject(AllToDoItems);
 }
-
-
 
 ProjectView.render();
 
 ToDoListView.displayAllItemsTasks();
-
-

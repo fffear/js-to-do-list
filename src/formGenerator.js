@@ -95,7 +95,7 @@ const FormGenerator = (function() {
   }
 
   function createToDoItemForm() {
-    let currentProjectName = document.querySelector(".project-heading").textContent;
+    let currentProjectId = document.querySelector(".project-heading").dataset.projectId;
     let toDoItemForm = document.createElement("form");
     toDoItemForm.setAttribute("id", "to-do-item-form");
     createToDoInput("text", "title", "title", "Title");
@@ -142,7 +142,7 @@ const FormGenerator = (function() {
       if (!(title === "" || title.search(/^\s*$/) === 0) && (!(dueDate === "" || dueDate.search(/^\s*$/) === 0))) {
         // Event emit
         let toDoItemData = {
-          currentProjectName, title, description, dueDate, priority
+          currentProjectId, title, description, dueDate, priority
         };
 
         Events.emit("toDoItemCreated", toDoItemData);
