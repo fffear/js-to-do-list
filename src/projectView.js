@@ -13,12 +13,12 @@ let ProjectView = (function(projects) {
 
   document.addEventListener("click", deleteProject);
 
-  Events.on("projectCreated", render);
+  Events.on("projectCreated", renderNewProject);
 
   function deleteProject(e) {
     if (e.target.className === "del") {
-      projectList.removeChild(e.target.parentNode);
-      Events.emit("projectDeleted", e.target.parentNode.dataset.projectId);
+      projectList.removeChild(e.target.parentNode.parentNode);
+      Events.emit("projectDeleted", e.target.parentNode.parentNode.dataset.projectId);
     }
   }
 
@@ -31,11 +31,20 @@ let ProjectView = (function(projects) {
     });
   }
 
+  function renderNewProject() {
+    projectNames.length = 0;
+    extractProjectName(projects.slice(-1), projectNames);
+
+    let data = { projectNames };
+
+    let newProject = Mustache.render(projectTemplate, data);
+
+    projectList.innerHTML += newProject; 
+  }
+
   function render() {
     extractProjectName(projects.slice(1), projectNames);
     extractProjectName(projects.slice(0, 1), allTasksName);
-
-    // let projectHeading = document.querySelector(".project-heading");
 
     let allTasks = { allTasksName };
     let data = { projectNames };

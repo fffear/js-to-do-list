@@ -32,10 +32,16 @@ const ToDoItemView = (function(projects) {
       description: targetItem.description,
       dueDate: targetItem.dueDate,
       priority: targetItem.priority,
-      taskIDNo: targetItem.taskIDNo
+      taskIDNo: targetItem.taskIDNo,
+      priorityClass: convertPriorityClass(targetItem.priority)
     }; 
 
     return objectData;
+
+    function convertPriorityClass(priorityString) {
+      let alteredString = priorityString;
+      return alteredString.replace(/\s/, "-").toLowerCase();
+    }
   }
 
   function render(taskIDNo) {

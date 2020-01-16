@@ -265,18 +265,26 @@ const FormGenerator = (function() {
       let description = document.querySelector(`#edit-description-${taskIDNo}`).value;
       let dueDate = document.querySelector(`#edit-due-date-${taskIDNo}`).value;
       let priority = document.querySelector(`#edit-priority-${taskIDNo}`).value;
+      let priorityClass = convertPriorityClass(priority);
 
       // check valid input data
       if (!(title === "" || title.search(/^\s*$/) === 0) && (!(dueDate === "" || dueDate.search(/^\s*$/) === 0))) {
         let toDoItemData = {
-          title, description, dueDate, priority, taskIDNo
+          title, description, dueDate, priority, priorityClass, taskIDNo
         };
 
         Events.emit("toDoItemEdited", toDoItemData);
         removeEditToDoForm();
         addToDoBtn.removeEventListener("click", editToDoTask);
       }
+
+      function convertPriorityClass(priorityString) {
+        let alteredString = priorityString;
+        return alteredString.replace(/\s/, "-").toLowerCase();
+      }
     }
+
+    
 
     function removeEditToDoForm() {
       toDoItemForm.remove();

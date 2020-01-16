@@ -1,14 +1,7 @@
-import { LocalStorageController } from "../localStorageController";
-
 // Module containing list of all projects
 const Projects = (function() {
   let currentProjectIDNo = 0;
   let _list = [];
-
-  // if (LocalStorageController.storageAvailable('localStorage') && localStorage.hasOwnProperty("projects")) {
-  //   let projects = JSON.parse(localStorage.getItem("projects"));
-  //   console.log(projects);
-  // }
 
   const addProject = (project) => {
     project.id = currentProjectIDNo;

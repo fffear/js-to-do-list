@@ -15,63 +15,64 @@
   </header>
 
   <main>
-    <div class="list-of-projects">
-      <div class="section-header">
-        <h2>Projects</h2>
-        <i class="fas fa-plus-circle create-new-project-btn"></i>
+    <div class="contents">
+      <div class="list-of-projects">
+        <div class="section-header">
+          <h2>Projects</h2>
+          <i class="fas fa-plus-circle create-new-project-btn"></i>
+        </div>
+  
+        <ul id="projects">  
+          <script id="all-tasks-template" type="text/template">
+            {{#allTasksName}}
+              <li data-project-id="{{id}}">
+                <span>{{name}}</span>
+              </li>
+            {{/allTasksName}}
+          </script>
+  
+          <script id="projects-template" type="text/template">
+            {{#projectNames}}
+              <li data-project-id="{{id}}">
+                <span>{{name}} <i class="del">X</i></span>
+                
+              </li>
+            {{/projectNames}}
+          </script>
+        </ul>
       </div>
-
-      <ul id="projects">
-        <script id="all-tasks-template" type="text/template">
-          {{#allTasksName}}
-            <li data-project-id="{{id}}">
-              <span>{{name}}</span>
-            </li>
-          {{/allTasksName}}
-        </script>
-
-        <script id="projects-template" type="text/template">
-          {{#projectNames}}
-            <li data-project-id="{{id}}">
-              <span>{{name}}</span>
-              <i class="del">X</i>
-            </li>
-          {{/projectNames}}
-        </script>
-      </ul>
-    </div>
-
-    <div class="list-of-todo-items">
-      <div class="project-heading">
-
-      </div>
-
-      <button class="create-new-todo-item-btn">
-        <i class="fas fa-plus-circle"></i> Create New ToDo Item
-      </button>
-
-      <ul id="todo-list">
-        <script id="todo-list-template" type="text/template">
-          {{#toDoList}}
-            <li data-task-id="{{taskIDNo}}">
-              <div class="to-do-item-div">
-                <span>{{title}}</span>
-                <span>{{dueDate}}</span>
-                <span>{{priority}}</span>
-                <i class="del-item">X</i>
-              </div>
-
-              <div class="hidden">
-                <div>
-                  <h3>Description</h3>
-                  <div>{{description}}</div>
+  
+      <div class="list-of-todo-items">
+        <div class="project-heading">
+  
+        </div>
+  
+        <button class="create-new-todo-item-btn">
+          <i class="fas fa-plus-circle"></i> Create New ToDo Item
+        </button>
+  
+        <ul id="todo-list">
+          <script id="todo-list-template" type="text/template">
+            {{#toDoList}}
+              <li class="{{priorityClass}}" data-task-id="{{taskIDNo}}">
+                <div class="to-do-item-div">
+                  <span>{{title}}</span>
+                  <span>{{dueDate}}</span>
+                  <span>{{priority}}</span>
+                  <i class="del-item">X</i>
                 </div>
-                <button class="edit-task">Edit Task</button>
-              </div>
-            </li>
-          {{/toDoList}}
-        </script>
-      </ul>
+  
+                <div class="hidden description">
+                  <div>
+                    <div>{{description}}</div>
+                  </div>
+                  <button class="edit-task">Edit Task</button>
+                </div>
+              </li>
+            {{/toDoList}}
+          </script>
+        </ul>
+      </div>
     </div>
   </main>
 
@@ -82,3 +83,5 @@
 
 
 <!-- The next step is project view when added -->
+
+<!-- ID projects li with -->

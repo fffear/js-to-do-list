@@ -20,6 +20,8 @@ const ToDoListView = (function(projects, projectClass) {
     removeCreateToDoItemBtn();
 
     displaySelectedProject("All To-Do Items", 0);
+    removeHighlightSelectedProject();
+    projectList.children[0].firstElementChild.classList.add("selected");
     render();
 
   }
@@ -28,12 +30,23 @@ const ToDoListView = (function(projects, projectClass) {
     if (e.target.tagName == "SPAN") {
       if (e.target.innerText === "All To-Do Items") {
         removeCreateToDoItemBtn();
+        displaySelectedProject(e.target.innerText, e.target.parentNode.dataset.projectId);
       } else {
         addCreateToDoItemBtn();
+        displaySelectedProject(e.target.innerText.slice(0, -2), e.target.parentNode.dataset.projectId);
       }
+      removeHighlightSelectedProject();
 
-      displaySelectedProject(e.target.innerText, e.target.parentNode.dataset.projectId);
+      let selectedProject = e.target;
+      selectedProject.classList.add("selected");
+
       render();
+    }
+  }
+
+  function removeHighlightSelectedProject() {
+    for (let project of projectList.children) {
+      project.firstElementChild.classList.remove("selected");
     }
   }
   
@@ -81,11 +94,18 @@ const ToDoListView = (function(projects, projectClass) {
         description: toDoItem.description,
         dueDate: toDoItem.dueDate,
         priority: toDoItem.priority,
-        taskIDNo: toDoItem.taskIDNo
+        taskIDNo: toDoItem.taskIDNo,
+        priorityClass: convertPriorityClass(toDoItem.priority)
       });
+
     });
 
     return objectData;
+
+    function convertPriorityClass(priorityString) {
+      let alteredString = priorityString;
+      return alteredString.replace(/\s/, "-").toLowerCase();
+    }
   }
 
   function render() {
